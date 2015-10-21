@@ -1,7 +1,7 @@
 # Ansible - My Playbook
 
 Ansible is a simple way to automate apps and IT infrastructure
-(Configuration and deployment). It is both human-readable and
+(Configuration and deployment). It is both humanm-readable and
 machine-parsable through playbooks.
 
 ## Building my infrastructure stack and deploying application using Ansible playbook
@@ -30,10 +30,18 @@ If you use it, I recommend you to change the
 public key in 'roles/users/files/'. The name's file must be the
 same as the one you put in the 'ssh\_key' subelement in 'roles/users/vars/main.yml'.
 
+## Roles :
+
+Here is the roles available :
+-   hostname configuration
+-   users creation and configuration
+-   sudoers installation and configuration
+-   Apache Mesos installation and configuration
+
 # TODO :<a id="sec-2" name="sec-2"></a>
 
 -   Advanced Packaging Tool configuration
--   Apache Mesos (Open source cluster manager)
 -   Apache Zookeeper  (Mesos framework : Service discovery)
 -   Apache Aurora (Mesos framework : Scheduler)
+-   Marathon (Mesos framework : Scheduler)
 -   More coming...
