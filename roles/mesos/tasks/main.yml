@@ -1,0 +1,62 @@
+# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
+#
+# List of tasks for the installation of
+# Mesos orchestrer.
+#
+
+# Print a statement during the execution
+- debug: msg="Mesos installation for {{mesos_installation_mode}}"
+
+# Install all the packages that will be needed to run mesos
+# on the remote host (apt module used)
+- name: Install OS packages
+  sudo: true
+  apt: pkg={{item}} state=present update_cache=yes
+  with_items:
+    - wget
+    - curl
+    - unzip
+    - python-setuptools
+    - python-dev
+    - openjdk-7-jre-headless
+    - openjdk-7-jdk
+    - maven
+
+# Copy the Apache Mesos packages to the remote host
+- name: Copy Apache Mesos package
+  copy: src={{mesos_package}} dest=/tmp
+
+# Execute the installation of the Apache Mesos package
+- name: Apache Mesos package installation
+  sudo: true
+  apt: deb=/tmp/{{mesos_package}}
+    
+## After the package installation, we make sure that the
+## working host is clean and ready for the mesos configuration
+#- debug: msg="Cleaning the host to prepare the configuration"
+
+# Removing the work dir
+#- name: Remove work dir of mesos
+#  sudo: true
+#  file: path={{mesos_work_dir}} state=absent
+
+#- name: Remove zk file
+#  sudo: true
+#  file: path=/etc/mesos/zk state=absent
+
+# Removing the mesos-master configuration
+#- name: Remove mesos-master conf file
+#  sudo: true
+#  file: path=/etc/mesos/mesos-master state=absent
+
+# Removing the mesos-slave configuration
+#- name: Remove mesos-slave conf file
+#  sudo: true
+#  file: path=/etc/mesos/mesos-slave state=absent
+
+# Removing the mesos configuration directory
+#- name: Remove mesos conf dir
+#  sudo: true
+#  file: path=/etc/mesos state=absent
+
+## After the cleaning, here is the configuration tasks

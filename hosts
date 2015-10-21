@@ -1,0 +1,10 @@
+# Author : zagabe.ed@gmail.com
+#
+# Here is the listing of all your hosts for the
+# configuration and deployement
+#
+
+# Define the 'testing' group
+[testing]
+host1 var_hostname=orza-node1
+host2 var_hostname=orza-node2

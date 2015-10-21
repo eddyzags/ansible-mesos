@@ -1,0 +1,19 @@
+# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
+#
+# Tasks file for 'sudoers' role :
+# Listing of tasks for setting the sudo group
+# to NOPASSWD
+#
+
+# Install the sudo from the apt
+- name: Install sudo
+  apt: name=sudo state=present
+
+# Setting the sudo group to NOPASSWD
+- name: Setting sudo group to NOPASSWD
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%sudo'
+    line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
