@@ -1,16 +1,19 @@
 # Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
 # List of tasks for the installation of
-# Mesos orchestrer.
+# Apchage Mesos orchestrer.
 #
 
-# Print a statement during the execution
-- debug: msg="Mesos installation for {{mesos_installation_mode}}"
+# Add an apt key
+- name: Add apt_key for repos.mesosphere.io repo
+  apt_key: keyserver=keyserver.ubuntu.com id=E56151BF
 
-# Install all the packages that will be needed to run mesos
-# on the remote host (apt module used)
-- name: Install OS packages
-  sudo: true
+# Add repos.mesosphere.io repository
+- name: Add mesosphere repository
+  apt_repository: repo="deb http://repos.mesosphere.io/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main" state=present
+
+# Install all the packages needed for mesos
+- name: Install packages needed for mesos
   apt: pkg={{item}} state=present update_cache=yes
   with_items:
     - wget
@@ -18,45 +21,36 @@
     - unzip
     - python-setuptools
     - python-dev
-    - openjdk-7-jre-headless
-    - openjdk-7-jdk
-    - maven
+    - python-pip
+    - "mesos"
 
-# Copy the Apache Mesos packages to the remote host
-- name: Copy Apache Mesos package
-  copy: src={{mesos_package}} dest=/tmp
+# Install the mesos.cli to work with mesos
+- name: Install mesos.cli
+  pip: name=mesos.cli
 
-# Execute the installation of the Apache Mesos package
-- name: Apache Mesos package installation
-  sudo: true
-  apt: deb=/tmp/{{mesos_package}}
-    
-## After the package installation, we make sure that the
-## working host is clean and ready for the mesos configuration
-#- debug: msg="Cleaning the host to prepare the configuration"
+# Remove configuration files
+- name: Removing the configuration files
+  file: path={{item}} state=absent
+  with_items:
+    - "/etc/mesos/zk"
+    - "/etc/mesos-master/quorum"
+    - "/etc/mesos-master/work_dir"
+    - "/etc/mesos-slave/master"
 
-# Removing the work dir
-#- name: Remove work dir of mesos
-#  sudo: true
-#  file: path={{mesos_work_dir}} state=absent
+# Configure the /etc/mesos/zk which is the listing of
+# zookeeper URLs
+- name: Configure the /etc/mesos/zk file
+  template: src=zk.j2 dest=/etc/mesos/zk
 
-#- name: Remove zk file
-#  sudo: true
-#  file: path=/etc/mesos/zk state=absent
+# Configure the /etc/mesos-master/quorum which is the number
+# of master in the cluster
+- name: Configure the /etc/mesos-master/quorum
+  template: src=master_quorum.j2 dest=/etc/mesos-master/quorum
 
-# Removing the mesos-master configuration
-#- name: Remove mesos-master conf file
-#  sudo: true
-#  file: path=/etc/mesos/mesos-master state=absent
-
-# Removing the mesos-slave configuration
-#- name: Remove mesos-slave conf file
-#  sudo: true
-#  file: path=/etc/mesos/mesos-slave state=absent
-
-# Removing the mesos configuration directory
-#- name: Remove mesos conf dir
-#  sudo: true
-#  file: path=/etc/mesos state=absent
-
-## After the cleaning, here is the configuration tasks
+# Configure the /etc/mesos-master/work_dir which is the
+# working directory of the master
+- name: Configure the /etc/mesos-master/work_dir
+  template: src=master_work_dir.j2 dest=/etc/mesos-master/work_dir
+  notify:
+    - Start mesos-master
+    - Start mesos-slave

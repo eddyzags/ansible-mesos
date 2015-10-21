@@ -4,10 +4,7 @@
 # for the mesos automation role are defined. 
 #
 
-# Define the installation mode
-mesos_installation_mode: master #{master|salver|master-slaver}
-
-# Setting up the mesos version
+# Setting up the mesos version.
 mesos_version: "0.25.0"
 
 # Setting the /var/lib/mesos working directory because '/var' is a standard subdirectory
@@ -15,4 +12,15 @@ mesos_version: "0.25.0"
 # containes dynamic data libraries and files.
 mesos_work_dir: /var/lib/mesos
 
-mesos_package: mesos_0.24.1-0.2.35.debian81_amd64.deb
+# Hostname definition of the remote hosts. This variable will walk through all the hostnames
+# defined in the inventory file.
+mesos_hostname: "{{inventory_hostname}}"
+
+# Definition of the zoopeeker URLs.
+zookeeper_hostnames: "{{mesos_hostname}}:2181"
+
+# Definition of the zookeeper URLs for the master configuration file.
+mesos_zookeeper_masters: "zk://{{zookeeper_hostnames}}/mesos"
+
+# Definition of the quorum which is the number of master in the cluster.
+master_quorum: 4
