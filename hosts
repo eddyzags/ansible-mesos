@@ -8,3 +8,8 @@
 [testing]
 host1 var_hostname=orza-node1
 host2 var_hostname=orza-node2
+
+# Define the 'zookeeper' group
+[zookeeper]
+host1 zoo_id=1
+host2 zoo_id=2

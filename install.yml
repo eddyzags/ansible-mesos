@@ -15,4 +15,12 @@
     - hostname
     - users
     - sudoers
-    
+    - mesos
+    - marathon
+
+# Zookeeper installation and configuration
+- name: Zookeeper installation and configuration
+  hosts: zookeeper
+  sudo: yes
+  roles:
+    - zookeeper

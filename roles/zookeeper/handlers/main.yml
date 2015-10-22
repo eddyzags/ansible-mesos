@@ -1,0 +1,18 @@
+# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
+#
+# Here is the handlers file for zookeeper installation and
+# configuration. All the tasks for Start/Restart/Stop the
+# zookeeper are listed below
+#
+
+# Task for start the zookeeper
+- name: Start zookeeper
+  service: name=zookeeper state=started
+
+# Task for restart the zookeeper
+- name: Restart zookeeper
+  service: name=zookeeper state=restarted
+
+# Task for stop the zookeeper
+- name: Stop zookeeper
+  service: name=zookeeper state=stopped

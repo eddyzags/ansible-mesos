@@ -35,13 +35,13 @@ same as the one you put in the 'ssh\_key' subelement in 'roles/users/vars/main.y
 Here is the roles available :
 -   hostname configuration
 -   users creation and configuration
--   sudoers installation and configuration
--   Apache Mesos installation and configuration
+-   sudoers configuration
+-   Apache Mesos
+-   Apache Zookeeper
+-   Marathon framework
 
-# TODO :<a id="sec-2" name="sec-2"></a>
+# TODO :
 
 -   Advanced Packaging Tool configuration
--   Apache Zookeeper  (Mesos framework : Service discovery)
 -   Apache Aurora (Mesos framework : Scheduler)
--   Marathon (Mesos framework : Scheduler)
 -   More coming...
