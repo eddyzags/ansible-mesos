@@ -12,15 +12,20 @@ mesos_version: "0.25.0"
 # containes dynamic data libraries and files.
 mesos_work_dir: /var/lib/mesos
 
-# Hostname definition of the remote hosts. This variable will walk through all the hostnames
-# defined in the inventory file.
-mesos_hostname: "{{inventory_hostname}}"
-
-# Definition of the zoopeeker URLs.
-zookeeper_hostnames: "{{mesos_hostname}}:2181"
-
-# Definition of the zookeeper URLs for the master configuration file.
-mesos_zookeeper_masters: "zk://{{zookeeper_hostnames}}/mesos"
-
 # Definition of the quorum which is the number of master in the cluster.
-master_quorum: 4
+mesos_master_quorum: 2
+
+# Definition of the master port
+mesos_master_port: 5050
+
+# Definition of the slave port
+mesos_slave_port: 5051
+
+# Definition of the log path of mesos
+mesos_log_dir: /var/log/mesos
+
+# Definition of the ULIMIT of the process
+mesos_ulimit: "-n 8191"
+
+# Definition of the mesos IP address
+mesos_ip_address: "{{ansible_eth0.ipv4.address}}"

@@ -8,19 +8,43 @@
 # on this file, it will execute this playbook composed of these roles.
 # You can define the hosts on which ansible will deploy the playbook by setting
 # the groups previously defined in the inventory file ('hosts').
-- name : Server configuration and deployment
-  hosts : testing
+# PLEASE MAKE SURE THAT YOUR CONFIGURATIONS ARE ALL WELL-DEFINED IN THE APPROPRIATE
+# ROLES FOLDER
+
+# Configuration of the hostname, users and sudoers. This play must be run on all remote hosts
+# to make sure that your machines are all set.
+- name : Server configuration
+  hosts : all
   sudo : yes
   roles :
     - hostname
     - users
     - sudoers
-    - mesos
-    - marathon
-
-# Zookeeper installation and configuration
-- name: Zookeeper installation and configuration
+    
+# Configuration of the Apache Zookeepers. This play will setup the quorum of zookeepers.
+- name: Apache Zookeeper configuration/deployment
   hosts: zookeeper
   sudo: yes
   roles:
     - zookeeper
+    
+# Configuration of the Apache Mesos MASTERS. This play will setup the quorum of master.
+- name: Apache Mesos MASTERS configuration/deployment
+  hosts: mesos-master
+  sudo: yes
+  roles:
+    - mesos
+
+# Configuration of the Apache Mesos SLAVES. This play will setup the slaves. 
+- name: Apache Mesos SLAVES configuration/deployment
+  hosts: mesos-slave
+  sudo: yes
+  roles:
+    - mesos
+
+# Configuration of the Marathon schedulers. This play will setup the containers orchestrer.
+- name: Marathon schedulers configuration/deployment
+  hosts: marathon
+  sudo: yes
+  roles:
+    - marathon

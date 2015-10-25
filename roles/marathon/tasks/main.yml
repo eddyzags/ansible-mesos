@@ -15,28 +15,34 @@
     - openjdk-8-jre-headless
     - marathon
 
-# Create all the configuration folders
-- name: Creating configuration folders
-  file: path={{item}} state=directory mode=0755
+# Remove all the default configuration folders
+- name: Removing configuration folders
+  file: path={{item}} state=absent
   with_items:
-    - "/etc/sysconfig"
-    - "/etc/marathon"
     - "/etc/marathon/conf"
 
+# Copy the default marathon configuration file
+- name: Copy default marathon configuration file
+  template: src=default_marathon_conf.j2 dest=/etc/default/marathon
+
+    
+# Task for start marathon
+- name: Start marathon
+  service: name=marathon state=started
+    
 # Copy marathon configuration file
-- name: Copy the /etc/sysconfig/marathon file
-  template: src=marathon.j2 dest=/etc/sysconfig/marathon
+#- name: Copy the /etc/sysconfig/marathon file
+#  template: src=marathon.j2 dest=/etc/sysconfig/marathon
 
 # Copy master configuration file which is the mesos masters URLs
-- name: Copy the /etc/marathon/conf/master
-  template: src=master.j2 dest=/etc/marathon/conf/master
+#- name: Copy the /etc/marathon/conf/master
+#  template: src=master.j2 dest=/etc/marathon/conf/master
 
 # Copy zk configuration file which is the zookeepers URLs
-- name: Copy the /etc/marathon/conf/zk
-  template: src=zk.j2 dest=/etc/marathon/conf/zk
+#- name: Copy the /etc/marathon/conf/zk
+#  template: src=zk.j2 dest=/etc/marathon/conf/zk
 
 # Copy http_port configuration file which is the port listened by Marathon
-- name: Copy the /etc/marathon/conf/http_port
-  template: src=http_port.j2 dest=/etc/marathon/conf/http_port
-  notify:
-    - Start marathon
+#- name: Copy the /etc/marathon/conf/http_port
+#  template: src=http_port.j2 dest=/etc/marathon/conf/http_port
+

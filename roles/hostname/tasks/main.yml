@@ -24,3 +24,11 @@
     state: present
     regexp: "^::1"
     line: "::1{{'\t'}}{{var_hostname}}{{'\t'}}localhost{{'\t'}}ip6-localhost{{'\t'}}ip6-loopback"
+
+# Restart the remote hosts
+- name: Restart remote hosts
+  command: shutdown -r now "Ansible updates triggered"
+    
+# Reload the networking configuration
+- name: Reload network configuration (waiting 1m20s)
+  pause: minutes=1 seconds=20

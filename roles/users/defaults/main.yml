@@ -6,7 +6,7 @@
 #
 
 # Definition of the primary group
-users_primary_group : orza
+users_primary_group : primary
 
 # Definition of the default shell
 users_default_shell : /bin/bash

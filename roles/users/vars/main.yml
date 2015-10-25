@@ -7,8 +7,8 @@
 # Define the users
 users:
   - username: eddy.zagabe
-    name : Eddy Zagabe
-    groups : "['{{users_primary_group}}', 'sudo']"
-    uid : 1001
+    name: Eddy Zagabe
+    groups: "['{{users_primary_group}}', 'sudo']"
+    uid: 1001
     ssh_keys:
       - eddy-zagabe.key

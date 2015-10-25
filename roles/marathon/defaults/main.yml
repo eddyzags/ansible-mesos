@@ -5,22 +5,13 @@
 #
 
 # Definition of the JAVA_HOME path
-marathon_java_home_path: "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64"
+marathon_java_home_path: "/usr/lib/jvm/java-8-openjdk-amd64/"
 
 # Definition of the JAVA_OPTS
-marathon_java_opts_var: "JAVA_OPTS=-Xmx512m"
-
-# Hostname definition of the remote hosts
-remote_hostnames: "{{inventory_hostname}}"
-
-# Definition of zookeeper URLs
-zookeepers_urls: "{{remote_hostnames}}:2181"
-
-# Definition of zookeeper's URLs for the master configuration
-mesos_zookeepers_masters: "zk://{{zookeepers_urls}}/mesos"
-
-# Definition of zookeeper's URLs for the marathon configuration
-marathon_zookeepers: "zk://{{zookeepers_urls}}/marathon"
+marathon_java_opts_var: "-Xmx512m"
 
 # Definition of the HTTP port of marathon
 marathon_http_port: "8080"
+
+# Definition of the High Availability mode
+marathon_high_availability_mode: true

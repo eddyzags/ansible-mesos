@@ -1,15 +1,39 @@
-# Author : zagabe.ed@gmail.com
+# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
 # Here is the listing of all your hosts for the
 # configuration and deployement
 #
 
-# Define the 'testing' group
-[testing]
-host1 var_hostname=orza-node1
-host2 var_hostname=orza-node2
+# Definition of the 'all' the remote hosts
+[all]
+host1 var_hostname=node1 ansible_ssh_user=user_admin
+host2 var_hostname=node2 ansible_ssh_user=user_admin
+host3 var_hostname=node3 ansible_ssh_user=user_admin
+host4 var_hostname=node4 ansible_ssh_user=user_admin
+host5 var_hostname=node5 ansible_ssh_user=user_admin
 
-# Define the 'zookeeper' group
+# Definition of the 'zookeeper' group
 [zookeeper]
 host1 zoo_id=1
 host2 zoo_id=2
+host3 zoo_id=3
+
+# Definition of the 'mesos-master' group
+[mesos-master]
+host1 ansible_ssh_user=user_admin
+host2 ansible_ssh_user=user_admin
+host3 ansible_ssh_user=user_admin
+
+# Definition of the 'mesos-slave' group
+[mesos-slave]
+host1 ansible_ssh_user=user_admin
+host2 ansible_ssh_user=user_admin
+host3 ansible_ssh_user=user_admin
+host4 ansible_ssh_user=user_admin
+host5 ansible_ssh_user=user_admin
+
+# Definition of the 'marathon' group
+[marathon]
+host3 ansible_ssh_user=user_admin
+host4 ansible_ssh_user=user_admin
+host5 ansible_ssh_user=user_admin

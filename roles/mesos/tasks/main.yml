@@ -22,7 +22,10 @@
     - python-setuptools
     - python-dev
     - python-pip
-    - "mesos"
+
+# Install Apache Mesos
+- name: Install Apache Mesos
+  apt: pkg="mesos" state=present install_recommends=no
 
 # Install the mesos.cli to work with mesos
 - name: Install mesos.cli
@@ -37,20 +40,64 @@
     - "/etc/mesos-master/work_dir"
     - "/etc/mesos-slave/master"
 
-# Configure the /etc/mesos/zk which is the listing of
-# zookeeper URLs
-- name: Configure the /etc/mesos/zk file
-  template: src=zk.j2 dest=/etc/mesos/zk
+# Copy the default mesos configuration
+- name: Copy mesos configuration
+  template: src=default_mesos_conf.j2 dest=/etc/default/mesos
 
-# Configure the /etc/mesos-master/quorum which is the number
-# of master in the cluster
-- name: Configure the /etc/mesos-master/quorum
-  template: src=master_quorum.j2 dest=/etc/mesos-master/quorum
+  
+## ALL THE TASKS HANDLE BY THE MESOS-MASTER GROUP
+# Copy the default mesos-master configuration
+- name: Copy mesos-master configuration
+  template: src=default_mesos_master_conf.j2 dest=/etc/default/mesos-master
 
-# Configure the /etc/mesos-master/work_dir which is the
-# working directory of the master
-- name: Configure the /etc/mesos-master/work_dir
-  template: src=master_work_dir.j2 dest=/etc/mesos-master/work_dir
-  notify:
-    - Start mesos-master
-    - Start mesos-slave
+# Set the mesos-slave to manal initialization
+- name: Set the mesos-slave.override to manual
+  template: src=manual.j2 dest=/etc/init/mesos-slave.override
+  when: "'mesos-slave' not in group_names"
+  
+# Removing the mesos-master.override if it exists
+- name: Remove mesos-master.override
+  file: path="/etc/init/mesos-master.override" state=absent
+  when: "'mesos-master' in group_names"
+
+# Stop mesos-slave service
+- name: Stop mesos-slave service
+  service: name=mesos-slave state=stopped
+  when: "'mesos-slave' not in group_names"
+  
+# Start the mesos master
+- name: Start mesos-master
+  service: name=mesos-master state=started
+  when: "'mesos-master' in group_names"
+
+
+## ALL THE TASKS HANDLE BY THE MESOS-SLAVE GROUP  
+# Copy the default mesos-slave configuration (only executed for the mesos-slave group)
+- name: Copy the mesos-slave configuration
+  template: src=default_mesos_slave_conf.j2 dest=/etc/default/mesos-slave
+
+# Checking if Mesos-master is install on the remote hosts
+- stat: path=/etc/init/mesos-slave.override
+  register: slave_file
+  
+# Copy the mesos-master.override file so that it will not automatically start when the server
+# reboots (only executed for the mesos-slave group)
+- name: Copy mesos-master.override file
+  template: src=manual.j2 dest=/etc/init/mesos-master.override
+  when: "'mesos-master' not in group_names"
+
+# Stop the Apache Mesos MASTER service (only executed for the mesos-slave group)
+- name: Stop Mesos-master service
+  service: name=mesos-master state=stopped
+  when: "'mesos-master' not in group_names"
+
+# Remove the mesos-slave.override file
+- name: Remove mesos-slave.override file
+  file: path="/etc/init/mesos-slave.override" state=absent
+  when: "'mesos-slave' in group_names"
+  
+# Start the mesos-slave
+- name: Start the mesos-slave service
+  service: name=mesos-slave state=started
+  when: "'mesos-slave' in group_names"
+

@@ -31,5 +31,7 @@
 - name: Copy zoo.cfg conf file into /etc/zookeeper/conf/ (replicated)
   template: src=zoo_replicated.j2 dest=/etc/zookeeper/conf/zoo.cfg
   when: zookeeper_standalone == false
-  notify:
-    - Restart zookeeper
+
+# Task for restart the zookeeper
+- name: Restart zookeeper
+  service: name=zookeeper state=restarted
