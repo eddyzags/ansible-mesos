@@ -1,0 +1,14 @@
+# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
+#
+# Here is the list of tasks to install the necessary
+# softwares.
+#
+
+# Install the softwares from the apt
+- name: Install necessary software
+  apt: pkg={{item}} state=present update_cache=yes
+  with_items:
+    - apt-transport-https
+    - wget
+    - curl
+    - unzip
