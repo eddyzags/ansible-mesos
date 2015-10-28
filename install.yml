@@ -21,6 +21,8 @@
     - users
     - sudoers
     - apt
+    - mesos-dns
+    - docker
     
 # Configuration of the Apache Zookeepers. This play will setup the quorum of zookeepers.
 - name: Apache Zookeeper configuration/deployment
@@ -42,7 +44,6 @@
   sudo: yes
   roles:
     - mesos
-    - docker
 
 # Configuration of the Marathon schedulers. This play will setup the containers orchestrer.
 - name: Marathon schedulers configuration/deployment
