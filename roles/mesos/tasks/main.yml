@@ -100,4 +100,3 @@
 - name: Start the mesos-slave service
   service: name=mesos-slave state=started
   when: "'mesos-slave' in group_names"
-
