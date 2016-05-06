@@ -16,7 +16,6 @@
     - users
     - sudoers
     - apt
-    - mesos-dns
     - docker
     
 - name: Apache Zookeeper
