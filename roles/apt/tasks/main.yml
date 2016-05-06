@@ -8,7 +8,6 @@
 - name: Install necessary software
   apt: pkg={{item}} state=present update_cache=yes
   with_items:
-    - apt-transport-https
-    - wget
-    - curl
-    - unzip
+    - apt_packages
+  unitl: job_result|success
+  retries: {{apt_retires_number}}
