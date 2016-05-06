@@ -1,0 +1,12 @@
+# Author: zagabe.ed@gmail.com (Eddy ZAGABE)
+#
+# Default variable for apt role
+#
+
+apt_packages: ["apt-transports-https", "wget", "curl", "unzip", "syslog-ng", "git", "python-apt"]
+
+# Number of retires
+apt_retries_number: 3
+
+# Delay between the retries (in sec)
+apt_retries_delay: 5
