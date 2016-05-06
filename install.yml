@@ -3,16 +3,11 @@
 # Playbooks used by ansible for the infrastructure
 # configuration and deployment.
 #
-
-# As soon as the 'ansible-playbook install.yml' command is launched
-# on this file, it will execute this playbook composed of these roles.
-# You can define the hosts on which ansible will deploy the playbook by setting
-# the groups previously defined in the inventory file ('hosts').
+#
 # PLEASE MAKE SURE THAT YOUR CONFIGURATIONS ARE ALL WELL-DEFINED IN THE APPROPRIATE
 # ROLES FOLDER
 
-# Configuration of the hostname, users and sudoers. This play must be run on all remote hosts
-# to make sure that your machines are all set.
+# Main configuration on every targeted instances
 - name : Server configuration
   hosts : all
   sudo : yes
@@ -24,28 +19,24 @@
     - mesos-dns
     - docker
     
-# Configuration of the Apache Zookeepers. This play will setup the quorum of zookeepers.
-- name: Apache Zookeeper configuration/deployment
+- name: Apache Zookeeper
   hosts: zookeeper
   sudo: yes
   roles:
     - zookeeper
     
-# Configuration of the Apache Mesos MASTERS. This play will setup the quorum of master.
-- name: Apache Mesos MASTERS configuration/deployment
+- name: Apache Mesos MASTERS 
   hosts: mesos-master
   sudo: yes
   roles:
     - mesos
 
-# Configuration of the Apache Mesos SLAVES. This play will setup the slaves. 
-- name: Apache Mesos SLAVES configuration/deployment
+- name: Apache Mesos SLAVES
   hosts: mesos-slave
   sudo: yes
   roles:
     - mesos
 
-# Configuration of the Marathon schedulers. This play will setup the containers orchestrer.
 - name: Marathon schedulers configuration/deployment
   hosts: marathon
   sudo: yes
