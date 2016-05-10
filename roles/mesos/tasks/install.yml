@@ -1,0 +1,77 @@
+#
+# Configuration and installation of Apache Mesos
+#
+
+- name: Add apt_key for repos.mesosphere.io repo
+  apt_key: keyserver=keyserver.ubuntu.com id=E56151BF
+
+- name: Add mesosphere repository
+  apt_repository: repo="deb http://repos.mesosphere.io/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main" state=present
+
+- name: Install packages needed for mesos
+  apt: pkg={{item}} state=present update_cache=yes
+  with_items:
+    - python-setuptools
+    - python-dev
+    - python-pip
+  register: job_result
+  until: job_result|success
+  retries: 3
+  tags:
+    - packages
+
+- name: Install Apache Mesos
+  apt: pkg="mesos" state=present install_recommends=no
+  register: job_result
+  until: job_result|success
+  retries: 3
+    
+- name: Install mesos.cli
+  pip: name=mesos.cli
+
+- name: Copy mesos configuration
+  template: src=default_mesos_conf.j2 dest=/etc/default/mesos
+
+  
+# mesos master tasks
+- name: Copy mesos-master configuration
+  template: src=default_mesos_master_conf.j2 dest=/etc/default/mesos-master
+  when: mesos_mode == "master" or mesos_mode == "master-slave"
+
+- name: Set the mesos-slave.override to manual
+  template: src=manual.j2 dest=/etc/init/mesos-slave.override
+  when: mesos_mode == "master"
+  
+- name: Remove mesos-master.override
+  file: path="/etc/init/mesos-master.override" state=absent
+  when: mesos_mode == "master" or mesos_mode == "master-slave"
+
+- name: Stop mesos-slave service
+  service: name=mesos-slave state=stopped
+  when: mesos_mode == "master"
+  
+- name: Start mesos-master
+  service: name=mesos-master state=started
+  when: mesos_mode == "master" or mesos_mode == "master-slave"
+
+
+# mesos slave tasks
+- name: Copy the mesos-slave configuration
+  template: src=default_mesos_slave_conf.j2 dest=/etc/default/mesos-slave
+  when: mesos_mode == "slave" or mesos_mode == "master-slave"
+
+- name: Copy mesos-master.override file
+  template: src=manual.j2 dest=/etc/init/mesos-master.override
+  when: mesos_mode == "slave"
+
+- name: Stop Mesos-master service
+  service: name=mesos-master state=stopped
+  when: mesos_mode == "slave"
+
+- name: Remove mesos-slave.override file
+  file: path="/etc/init/mesos-slave.override" state=absent
+  when: mesos_mode == "slave" or mesos_mode == "master-slave"
+  
+- name: Start the mesos-slave service
+  service: name=mesos-slave state=started
+  when: mesos_mode == "slave" or mesos_mode == "master-slave"
