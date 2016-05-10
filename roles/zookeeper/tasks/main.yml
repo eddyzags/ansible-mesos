@@ -1,37 +1,5 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# List of tasks for the installation of Apache
-# Zookeeper.
+# Main of Zookeeper role
 #
 
-# Installation of Zookeeper from the apt
-- name: Installation of Apache Zookeeper
-  apt: name={{item}} update_cache=yes
-  with_items:
-    - zookeeper
-    - zookeeperd
-
-# Remove the defaut configuration files
-- name: Remove the default configuration files
-  file: path={{item}} state=absent
-  with_items:
-    - "/etc/zookeeper/conf/myid"
-    - "/etc/zookeeper/conf/zoo.cfg"
-    
-# Copy the Zookeeper id file
-- name: Copy myid conf file into /etc/zookeeper/conf/
-  template: src=myid.j2 dest=/etc/zookeeper/conf/myid
-
-# Copy the Zookeeper zoo.cfg file for standalone deployment
-- name: Copy zoo.cfg conf file into /etc/zookeeper/conf/ (standalone)
-  template: src=zoo_standalone.j2 dest=/etc/zookeeper/conf/zoo.cfg
-  when: zookeeper_standalone == true
-
-# Copy the Zookeeper zoo.cfg file for replicated deployment
-- name: Copy zoo.cfg conf file into /etc/zookeeper/conf/ (replicated)
-  template: src=zoo_replicated.j2 dest=/etc/zookeeper/conf/zoo.cfg
-  when: zookeeper_standalone == false
-
-# Task for restart the zookeeper
-- name: Restart zookeeper
-  service: name=zookeeper state=restarted
+- include: install.yml
