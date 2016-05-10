@@ -1,0 +1,22 @@
+#
+# Configuration and installation of Marathon
+#
+
+- name: Add jessie-backports repo
+  apt_repository: repo="deb http://http.debian.net/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}}-backports main" state=present
+
+- name: Installation of open-jdk-8 and Marathon
+  apt: name={{item}} update_cache=yes
+  with_items:
+    - openjdk-8-jre-headless
+    - marathon
+  register: job_result
+  until: job_result|success
+  retries: 3
+
+- name: Copy marathon configuration file
+  template: src=default_marathon_conf.j2 dest=/etc/default/marathon
+
+    
+- name: Start marathon
+  service: name=marathon state=started
