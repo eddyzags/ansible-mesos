@@ -1,6 +1,5 @@
-# Author: zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Default variable for apt role
+# Default variables for APT role
 #
 
 apt_packages: ["apt-transports-https", "wget", "curl", "unzip", "syslog-ng", "git", "python-apt"]

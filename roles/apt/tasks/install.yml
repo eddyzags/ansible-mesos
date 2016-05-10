@@ -1,0 +1,11 @@
+#
+# Packages installation
+#
+
+- name: Install necessary software
+  apt: pkg={{item}} state=present update_cache=yes
+  with_items:
+    - apt_packages
+  register: job_result
+  unitl: job_result|success
+  retries: {{apt_retires_number}}
