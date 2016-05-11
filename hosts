@@ -1,9 +1,7 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Listing of available instances and groups
+# Inventory file
 #
 
-# Definition of the 'all' the remote hosts
 [all]
 host1 var_hostname=node1
 host2 var_hostname=node2
@@ -11,27 +9,16 @@ host3 var_hostname=node3
 host4 var_hostname=node4
 host5 var_hostname=node5
 
-# Definition of the 'zookeeper' group
 [zookeeper]
 host1 zoo_id=1
 host2 zoo_id=2
 host3 zoo_id=3
 
-# Definition of the 'mesos-master' group
-[mesos-master]
+[mesos]
 host1
 host2
 host3
 
-# Definition of the 'mesos-slave' group
-[mesos-slave]
-host1
-host2
-host3
-host4
-host5
-
-# Definition of the 'marathon' group
 [marathon]
 host3
 host4
