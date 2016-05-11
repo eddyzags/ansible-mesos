@@ -1,7 +1,5 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Here is the default file where all the variables
-# for the docker role are defined
+# Default Docker role variables
 #
 
 # Definition of the distribution for the repository source list

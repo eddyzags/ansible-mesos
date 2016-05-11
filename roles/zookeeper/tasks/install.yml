@@ -1,0 +1,22 @@
+#
+# Configure and install Zookeeper
+#
+
+- name: Installation of Apache Zookeeper
+  apt: name={{item}} update_cache=yes
+  with_items:
+    - zookeeper
+    - zookeeperd
+  register: job_result
+  until: job_result|success
+  retries: 3
+
+- name: Copy myid conf file into /etc/zookeeper/conf/
+  template: src=myid.j2 dest=/etc/zookeeper/conf/myid
+  when: zookeeper_standalone == false
+
+- name: Copy zoo.cfg conf file into /etc/zookeeper/conf/
+  template: src=zoo.cfg.j2 dest=/etc/zookeeper/conf/zoo.cfg
+
+- name: Restart zookeeper
+  service: name=zookeeper state=restarted

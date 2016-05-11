@@ -1,15 +1,10 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Tasks file for hostname :
-# Listing of tasks for update the hostname.
+# Hostname configuration
 #
 
-# Define the hostname by modifiying the /etc/hostname file
 - name: Update the hostname
   template: src=hostname.j2 dest=/etc/hostname owner=root group=root mode=0644
-  sudo: yes
 
-# Update the IPv4 hostname by modifying the /etc/hosts file
 - name: Update IPv4 hostname /etc/hosts
   lineinfile:
     dest: /etc/hosts
@@ -17,7 +12,6 @@
     regexp: "^127.0.0.1"
     line: "127.0.0.1{{'\t'}}{{var_hostname}}{{'\t'}}localhost{{'\t'}}localhost.localdomain{{'\n'}}"
 
-# Update the IPv6 hostname by modifying the /etc/hosts file
 - name: Update IPv6 hostname /etc/hosts
   lineinfile:
     dest: /etc/hosts
@@ -25,10 +19,9 @@
     regexp: "^::1"
     line: "::1{{'\t'}}{{var_hostname}}{{'\t'}}localhost{{'\t'}}ip6-localhost{{'\t'}}ip6-loopback"
 
-# Restart the remote hosts
+#TODO(eddyzags): Find another approach to update the hostname
 - name: Restart remote hosts
   command: shutdown -r now "Ansible updates triggered"
     
-# Reload the networking configuration
 - name: Reload network configuration (waiting 1m20s)
   pause: minutes=1 seconds=20
