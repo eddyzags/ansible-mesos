@@ -1,5 +1,5 @@
 #
-# Tasks file for sudoers role
+# Installation and configuration of sudo role
 #
 
 - name: Install sudo

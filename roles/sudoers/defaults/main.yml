@@ -1,6 +1,5 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Definition of defaults variables 
+# Default variables for sudoers
 #
 
 # Setting NOPASSD for sudo group
