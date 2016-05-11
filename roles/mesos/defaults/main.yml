@@ -2,8 +2,6 @@
 # Defaults variables for Mesos roles
 #
 
-mesos_version: "0.25.0"
-
 mesos_work_dir: /var/lib/mesos
 
 # Definition of the quorum
