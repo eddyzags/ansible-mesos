@@ -1,8 +1,5 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Defaults variables for 'users' role :
-# Here are defined all the variables that the users'
-# role will use.
+# Default variables for users role
 #
 
 # Definition of the primary group

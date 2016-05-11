@@ -1,7 +1,5 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Tasks file for 'users' role :
-# Listing of tasks for create and configure the users.
+# Creation and configuration of users
 #
 
 - name : Creating the primary group
