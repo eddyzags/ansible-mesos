@@ -1,7 +1,5 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Tasks file for hostname :
-# Listing of tasks for update the hostname.
+# Hostname configuration
 #
 
 - name: Update the hostname
@@ -21,6 +19,7 @@
     regexp: "^::1"
     line: "::1{{'\t'}}{{var_hostname}}{{'\t'}}localhost{{'\t'}}ip6-localhost{{'\t'}}ip6-loopback"
 
+#TODO(eddyzags): Find another approach to update the hostname
 - name: Restart remote hosts
   command: shutdown -r now "Ansible updates triggered"
     
