@@ -1,13 +1,11 @@
 # Playbook<a id="sec-1" name="sec-1"></a>
 
 This playbook is meant to build an entire infrastructure stack with
-applications on which i'm currently working.
-All you need is the ip addresses, the users login and the sudo rights
-enable for these users of the remote hosts (NOPASSWD). This playbook is
-tested on Debian 8.1 Jessie, so I recommend to use that to test these modules.
+frameworks on which i'm currently working.
+This playbook is tested on Debian 8.4 Jessie, so I recommend to use that to test these modules.
 
-This stack can be on a single node or multiples nodes. You can add
-or remove them on the inventory file ``hosts``.
+This stack can be on a single node or multiples nodes. You can manage them in the inventory
+file ``hosts``.
 
 PLEASE MAKE SURE THAT YOUR CONFIGURATIONS ARE ALL WELL-DEFINED IN THE
 APPROPRIATE ROLES FOLDERS.
@@ -29,13 +27,6 @@ APPROPRIATE ROLES FOLDERS.
     host2 ansible_ssh_user=username
     host3 ansible_ssh_user=username
     
-    [mesos-slave]
-    host1 ansible_ssh_user=username
-    host2 ansible_ssh_user=username
-    host3 ansible_ssh_user=username
-    host4 ansible_ssh_user=username
-    host5 ansible_ssh_user=username
-    
     [marathon]
     host3 ansible_ssh_user=username
     host4 ansible_ssh_user=username
@@ -51,10 +42,10 @@ Here is the roles available :
 -   Hostname - Configuration
 -   Users - Creation and configuration
 -   Sudoers - Configuration
--   Apache Mesos
--   Apache Zookeeper
+-   Apache Mesos - Configuration and installation
+-   Apache Zookeeper - Configuration and installation
 -   Docker - Configuration and installation
--   Marathon framework
+-   Marathon framework - Configuration and installation
 -   Mesos-DNS server
 
 # TODO :<a id="sec-2" name="sec-2"></a>
