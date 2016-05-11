@@ -1,10 +1,12 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
 # Tasks file for sudoers role
 #
 
 - name: Install sudo
   apt: name=sudo state=present
+  register: job_result
+  until: job_result|success
+  retries: 3
 
 - name: Setting sudo group to NOPASSWD
   lineinfile:
