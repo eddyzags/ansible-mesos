@@ -1,4 +1,3 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
 # Playbooks used by ansible for the infrastructure
 # configuration and deployment.
@@ -7,12 +6,10 @@
 # PLEASE MAKE SURE THAT YOUR CONFIGURATIONS ARE ALL WELL-DEFINED IN THE APPROPRIATE
 # ROLES FOLDER
 
-# Main configuration on every targeted instances
 - name : Server configuration
   hosts : all
   sudo : yes
   roles :
-    - hostname
     - users
     - sudoers
     - apt
@@ -24,15 +21,11 @@
   roles:
     - zookeeper
     
-- name: Apache Mesos MASTERS 
-  hosts: mesos-master
+- name: Apache Mesos
+  hosts: mesos
   sudo: yes
-  roles:
-    - mesos
-
-- name: Apache Mesos SLAVES
-  hosts: mesos-slave
-  sudo: yes
+  vars:
+    mesos_mode: master-slave
   roles:
     - mesos
 
