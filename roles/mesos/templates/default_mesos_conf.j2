@@ -20,6 +20,6 @@ IP={{mesos_ip_address}}
 export MESOS_WORK_DIR={{mesos_work_dir}}
 
 # Definition of the hostname to avoid resolve dns problems
-export MESOS_HOSTNAME={{hostvars[inventory_hostname]['ansible_eth1']['ipv4']['address']}}
+export MESOS_HOSTNAME={{hostvars[inventory_hostname]['ansible_eth0']['ipv4']['address']}}
 
 

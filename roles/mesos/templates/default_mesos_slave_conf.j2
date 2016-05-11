@@ -4,6 +4,6 @@
 export MESOS_PORT={{mesos_slave_port}}
 
 # Definition of the quorum of masters
-export MESOS_MASTER=zk://{% for host in groups['zookeeper'] %}{{host}}:2181{% if not loop.last%},{% endif %}{% endfor %}/mesos'
+export MESOS_MASTER="zk://{% for host in groups['zookeeper'] %}{{host}}:2181{% if not loop.last%},{% endif %}{% endfor %}/mesos"
 
 export MESOS_CONTAINERIZERS="docker,mesos"
