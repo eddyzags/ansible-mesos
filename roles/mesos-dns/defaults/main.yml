@@ -1,7 +1,5 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Here is the default file where all the variables for
-# the Mesos-DNS role are defined
+# Default variables for Mesos-dns role
 #
 
 # Definition of the refreshSeconds which is the frequency at which Mesos-DNS

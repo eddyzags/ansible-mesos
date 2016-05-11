@@ -1,15 +1,13 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Tasks file for 'sudoers' role :
-# Listing of tasks for setting the sudo group
-# to NOPASSWD
+# Installation and configuration of sudo role
 #
 
-# Install the sudo from the apt
 - name: Install sudo
   apt: name=sudo state=present
+  register: job_result
+  until: job_result|success
+  retries: 3
 
-# Setting the sudo group to NOPASSWD
 - name: Setting sudo group to NOPASSWD
   lineinfile:
     dest: /etc/sudoers

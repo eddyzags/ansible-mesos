@@ -1,8 +1,5 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Defaults variables for 'sudoers' role :
-# Here are defined all the variables that the sudoers'
-# role will use
+# Default variables for sudoers
 #
 
 # Setting NOPASSD for sudo group

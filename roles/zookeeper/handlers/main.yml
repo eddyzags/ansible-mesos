@@ -1,8 +1,5 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
 #
-# Here is the handlers file for zookeeper installation and
-# configuration. All the tasks for Start/Restart/Stop the
-# zookeeper are listed below
+# Handlers for zookeeper role
 #
 
 # Task for start the zookeeper
