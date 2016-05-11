@@ -1,6 +1,5 @@
 #
-# here is the default file where all the variables for
-# the marathon role are defined.
+# Default variables of Marathon role
 #
 
 # Definition of the JAVA_HOME path
