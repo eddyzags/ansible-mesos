@@ -2,7 +2,7 @@
 # Default variables for APT role
 #
 
-apt_packages: ["apt-transports-https", "wget", "curl", "unzip", "syslog-ng", "git", "python-apt"]
+apt_packages: ["apt-transport-https", "wget", "curl", "unzip", "syslog-ng", "git", "python-apt", "mysql-client", "ansible"]
 
 # Number of retires
 apt_retries_number: 3
