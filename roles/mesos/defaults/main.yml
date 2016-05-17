@@ -24,3 +24,19 @@ mesos_ip_address: "{{ansible_eth0.ipv4.address}}"
 
 # Cluster name
 mesos_cluster_name: "lisa"
+
+# Number of cpus
+mesos_slave_cpus: "{{ansible_processor_vcpus}}"
+
+# Number of RAM (megabytes)
+mesos_slave_mem: "{{ansible_memtotal_mb}}"
+
+# Number of Disk (megabytes)
+mesos_slave_disk: "{{ansible_devices.sda.size}}"
+
+# Definition of the min port
+mesos_slaves_min_port: 21000
+
+# Definition of the max port
+mesos_slaves_max_port: 24000
+
