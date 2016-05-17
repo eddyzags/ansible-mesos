@@ -3,11 +3,11 @@
 #
 
 [all]
-host1 var_hostname=node1
-host2 var_hostname=node2
-host3 var_hostname=node3
-host4 var_hostname=node4
-host5 var_hostname=node5
+host1
+host2
+host3
+host4
+host5
 
 [zookeeper]
 host1 zoo_id=1
