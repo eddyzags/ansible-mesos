@@ -1,11 +1,10 @@
-#
-# Default variables for APT role
-#
+# defaults/main.yml
+
+# Apt default role variables
+---
 
 apt_packages: ["apt-transport-https", "wget", "curl", "unzip", "syslog-ng", "git", "python-apt", "mysql-client", "ansible"]
 
-# Number of retires
 apt_retries_number: 3
 
-# Delay between the retries (in sec)
 apt_retries_delay: 5

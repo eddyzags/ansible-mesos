@@ -1,5 +1,7 @@
-#
-# Main for APT role
-#
+# tasks/main.yml
+
+# Apt role
+---
 
 - include: install.yml
+  when: playbook_mode == "install"
