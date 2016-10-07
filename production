@@ -1,6 +1,4 @@
-#
-# Inventory file
-#
+# production inventory file
 
 [all]
 host1

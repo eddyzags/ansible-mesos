@@ -30,7 +30,7 @@ APPROPRIATE ROLES FOLDERS.
     host5
 
 
-To define your own user account, take a look at [users role](roles/users/vars/main.yml)___
+To define your own user account, take a look at [users role](roles/users/vars/main.yml)
 and copy your own public key in [this folder](roles/users/files)
 
 ## Roles
