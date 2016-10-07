@@ -1,11 +1,8 @@
-# Playbook<a id="sec-1" name="sec-1"></a>
+# Playbook
 
-This playbook is meant to build an entire infrastructure stack with
-frameworks on which i'm currently working.
-This playbook is tested on Debian 8.4 Jessie, so I recommend to use that to test these modules.
-
-This stack can be on a single node or multiples nodes. You can manage them in the inventory
-file ``hosts``.
+Those playbooks and roles are meant to build an entire infrastructure stack with
+frameworks on which i'm currently working. (tested on Debian 8.4 Jessie)
+You can manage your target server(s) in the inventory file ``production``.
 
 PLEASE MAKE SURE THAT YOUR CONFIGURATIONS ARE ALL WELL-DEFINED IN THE
 APPROPRIATE ROLES FOLDERS.
@@ -33,22 +30,22 @@ APPROPRIATE ROLES FOLDERS.
     host5
 
 
-To define your own user account, please take a look at [users role](roles/users/vars/main.yml)
+To define your own user account, take a look at [users role](roles/users/vars/main.yml)___
 and copy your own public key in [this folder](roles/users/files)
 
-## Roles :<a id="sec-1-2" name="sec-1-2"></a>
+## Roles
 
 Here is the roles available :
 -   Hostname - Configuration
--   Users - Creation and configuration
--   Sudoers - Configuration
--   Apache Mesos - Configuration and installation
--   Apache Zookeeper - Configuration and installation
--   Docker - Configuration and installation
--   Marathon framework - Configuration and installation
--   Mesos-DNS server
+-   Users - Configuration
+-   Sudoers - Configuration and packages
+-   Apache Mesos - Configuration and packages
+-   Apache Zookeeper - Configuration and packages
+-   Docker - Configuration and packages
+-   Marathon framework - Configuration and packages
+-   Mesos-DNS server - Configuration and packages
 
-# TODO :<a id="sec-2" name="sec-2"></a>
+# TODO
 
 -   Apache Aurora
 -   More coming...
