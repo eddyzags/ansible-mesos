@@ -1,15 +1,13 @@
+# handlers/main.yml
 #
-# Handlers for Marathon role
-#
+# Marathon role handlers
+---
 
-# Task for start marathon
 - name: Start marathon
   service: name=marathon state=started
 
-# Task for stop marathon
 - name: Stop marathon
   service: name=marathon state=stopped
 
-# Task for restart marathon
 - name: Restart marathon
   service: name=marathon state=stopped

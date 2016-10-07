@@ -1,9 +1,17 @@
+# tasks/install.yml
 #
-# Configuration and installation of Marathon
-#
+# Marathon configuration and installation
+---
 
-- name: Add jessie-backports repo
-  apt_repository: repo="deb http://http.debian.net/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}}-backports main" state=present
+- name: Add apt_key for marathon
+  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=E56151BF
+  tags:
+    - configuration
+
+- name: Add mesosphere repository source  
+  apt_repository: repo="deb http://repos.mesosphere.com/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main" state=present
+  tags:
+    - configuration
 
 - name: Installation of open-jdk-8 and Marathon
   apt: name={{item}} update_cache=yes
@@ -13,10 +21,14 @@
   register: job_result
   until: job_result|success
   retries: 3
+  tags:
+    - packages
 
 - name: Copy marathon configuration file
   template: src=default_marathon_conf.j2 dest=/etc/default/marathon
+  - configuration
 
     
 - name: Start marathon
   service: name=marathon state=started
+  - configuration
