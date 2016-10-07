@@ -3,7 +3,7 @@
 # Apt default role variables
 ---
 
-apt_packages: ["apt-transport-https", "wget", "curl", "unzip", "syslog-ng", "git", "python-apt", "mysql-client", "ansible"]
+apt_packages: ["apt-transport-https", "wget", "curl", "unzip", "syslog-ng", "git", "python-apt", "mysql-client", "ansible", "ca-certificates"]
 
 apt_retries_number: 3
 
