@@ -1,6 +1,7 @@
+# vars/main.yml
 #
-# Users definition
-#
+# Users vars definition
+---
 
 users:
   - username: eddy.zagabe
