@@ -1,6 +1,6 @@
+# defaults/main.yml
 #
-# Default variables for sudoers
-#
+# Sudoers default variables
+---
 
-# Setting NOPASSD for sudo group
 nopasswd_for_sudoers : true

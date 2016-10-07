@@ -1,17 +1,7 @@
+# tasks/main.yml
 #
-# Installation and configuration of sudo role
-#
+# Sudoers role
+---
 
-- name: Install sudo
-  apt: name=sudo state=present
-  register: job_result
-  until: job_result|success
-  retries: 3
-
-- name: Setting sudo group to NOPASSWD
-  lineinfile:
-    dest: /etc/sudoers
-    state: present
-    regexp: '^%sudo'
-    line: '%sudo ALL=(ALL) NOPASSWD: ALL'
-    validate: 'visudo -cf %s'
+- include: install.yml
+  when: playbook_mode == "install"
