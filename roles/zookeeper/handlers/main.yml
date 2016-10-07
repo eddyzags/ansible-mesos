@@ -1,15 +1,13 @@
+# handlers/main.yml
 #
-# Handlers for zookeeper role
-#
+# Zookeeper handler handlers
+---
 
-# Task for start the zookeeper
 - name: Start zookeeper
   service: name=zookeeper state=started
 
-# Task for restart the zookeeper
 - name: Restart zookeeper
   service: name=zookeeper state=restarted
 
-# Task for stop the zookeeper
 - name: Stop zookeeper
   service: name=zookeeper state=stopped

@@ -1,6 +1,7 @@
+# tasks/install.yml
 #
-# Configure and install Zookeeper
-#
+# Zookeeper installation and configuration
+---
 
 - name: Installation of Apache Zookeeper
   apt: name={{item}} update_cache=yes
@@ -10,13 +11,21 @@
   register: job_result
   until: job_result|success
   retries: 3
+  tags:
+    - packages
 
 - name: Copy myid conf file into /etc/zookeeper/conf/
   template: src=myid.j2 dest=/etc/zookeeper/conf/myid
   when: zookeeper_standalone == false
+  tags:
+    - configuration
 
 - name: Copy zoo.cfg conf file into /etc/zookeeper/conf/
   template: src=zoo.cfg.j2 dest=/etc/zookeeper/conf/zoo.cfg
+  tags:
+    - configuration
 
 - name: Restart zookeeper
   service: name=zookeeper state=restarted
+  tags:
+    - configuration

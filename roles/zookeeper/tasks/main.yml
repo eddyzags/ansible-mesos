@@ -1,5 +1,7 @@
+# tasks/main.yml
 #
-# Main of Zookeeper role
-#
+# Zookeeper role
+---
 
 - include: install.yml
+  when: playbook_mode == "install"
