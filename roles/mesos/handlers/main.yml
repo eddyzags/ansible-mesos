@@ -1,32 +1,22 @@
-# Author : zagabe.ed@gmail.com (Eddy ZAGABE)
+# handlers/main.yml
 #
-# Here is the handlers file for the mesos installation
-# and configuration. All the tasks for Start/Restart/Stop
-# the mesos master and slave are listed below
-#
+# Mesos role handlers
+---
 
-## Mesos master handler tasks
-# Task for start the mesos master
 - name: Start mesos-master
   service: name=mesos-master state=started
 
-# Task for restart the mesos master
 - name: Restart mesos-master
   service: name=mesos-master state=restarted
 
-# Task for stop the mesos master
 - name: Stop mesos-master
   service: name=mesos-master state=stopped
   
-## Mesos slave handler tasks
-# Task for start the mesos slave
 - name: Start mesos-slave
   service: name=mesos-slave state=started
 
-# Task for restart the mesos slave
 - name: Restart mesos-slave
   service: name=mesos-slave state=restarted
 
-# Task for stop the mesos slave
 - name: Stop mesos-slave
   service: name=mesos-slave state=stopped
