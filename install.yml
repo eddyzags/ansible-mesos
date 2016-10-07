@@ -1,36 +1,19 @@
-#
-# Playbooks used by ansible for the infrastructure
-# configuration and deployment.
-#
-#
-# PLEASE MAKE SURE THAT YOUR CONFIGURATIONS ARE ALL WELL-DEFINED IN THE APPROPRIATE
-# ROLES FOLDER
+# install.yml
 
-- name : Server configuration
-  hosts : all
-  sudo : yes
-  roles :
-    - users
-    - sudoers
-    - apt
-    - docker
-    
-- name: Apache Zookeeper
-  hosts: zookeeper
-  sudo: yes
-  roles:
-    - zookeeper
-    
-- name: Apache Mesos
-  hosts: mesos
+# Cluster deployment playbook
+---
+
+- name: Default configuration
+  hosts: all
+  any_errors_fatal: true
   sudo: yes
   vars:
-    mesos_mode: master-slave
+    var_hostname: node
+    playbook_mode: "install"
   roles:
+    - sudoers
+    - users
+    - golang
+    - zookeeper
     - mesos
-
-- name: Marathon schedulers configuration/deployment
-  hosts: marathon
-  sudo: yes
-  roles:
     - marathon
