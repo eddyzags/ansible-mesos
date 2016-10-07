@@ -1,0 +1,12 @@
+# tasks/upgrade.yml
+#
+# Upgrade docker engine
+---
+
+- name: Upgrading docker
+  apt: upgrade=docker update_cache=yes
+  register: job_result
+  until: job_result|success
+  retries: 3
+  tags:
+    - packages

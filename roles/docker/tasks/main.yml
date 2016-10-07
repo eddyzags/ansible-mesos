@@ -1,5 +1,10 @@
+# tasks/main.yml
 #
-# Main for Docker role
-#
+# Docker role
+---
 
 - include: install.yml
+  when: playbook_mode == "install"
+
+- include: upgrade.yml
+  when: playbook_mode == "upgrade"
