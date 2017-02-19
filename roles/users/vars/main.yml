@@ -7,5 +7,4 @@ users:
   - username: eddy.zagabe
     name: Eddy Zagabe
     groups: "['{{users_primary_group}}', 'sudo']"
-    ssh_keys:
-      - eddy-zagabe.key
+    ssh_key: "/home/zagabe_e/.ssh/id_rsa.pub"

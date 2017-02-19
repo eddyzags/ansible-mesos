@@ -3,4 +3,4 @@
 # Sudoers default variables
 ---
 
-nopasswd_for_sudoers : true
+sudoers_nopasswd : true

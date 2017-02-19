@@ -6,3 +6,4 @@
 users_primary_group : primary
 users_default_shell : /bin/bash
 users_create_home_directory : yes
+users_ssh_key_pub: /home/zagabe_e/.ssh/id_rsa.pub
