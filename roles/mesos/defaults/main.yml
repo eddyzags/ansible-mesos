@@ -1,16 +1,16 @@
-
+#
 # defaults/main.yml
 #
 # Mesos role defaults variables
 ---
 
-mesos_cluster_name: "lisa"
+mesos_cluster_name: "cluster"
 mesos_ip_address: "{{ansible_eth0.ipv4.address}}"
 mesos_work_dir: /var/lib/mesos
 mesos_log_dir: /var/log/mesos
 mesos_ulimit: "-n 8191"
 
-mesos_master_quorum: 2
+mesos_master_quorum: 1
 mesos_masters_port: 5050
 
 mesos_slave_port: 5051
@@ -19,4 +19,3 @@ mesos_slave_mem: "{{ansible_memtotal_mb}}"
 mesos_slave_disk: "{{ansible_devices.sda.size}}"
 mesos_slaves_min_port: 21000
 mesos_slaves_max_port: 24000
-
