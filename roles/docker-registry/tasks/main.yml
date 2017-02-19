@@ -1,0 +1,7 @@
+# tasks/main.yml
+#
+#
+---
+
+- include: install.yml
+  when: playbook_mode == "install"

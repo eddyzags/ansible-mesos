@@ -1,0 +1,6 @@
+# defaults/main.yml
+#
+# Zookeeper default variables
+---
+
+docker_registry_ports: "5000:5000"

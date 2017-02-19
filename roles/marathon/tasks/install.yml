@@ -26,9 +26,11 @@
 
 - name: Copy marathon configuration file
   template: src=default_marathon_conf.j2 dest=/etc/default/marathon
-  - configuration
+  tags:
+    - configuration
 
     
 - name: Start marathon
   service: name=marathon state=started
-  - configuration
+  tags:
+    - configuration

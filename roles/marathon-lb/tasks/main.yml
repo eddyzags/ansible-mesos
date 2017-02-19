@@ -1,0 +1,7 @@
+# tasks/main.yml
+#
+# Marathon load balancer role
+---
+
+- include: install.yml
+  when: playbook_mode == "install"

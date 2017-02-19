@@ -7,6 +7,7 @@
   template: src=hostname.j2 dest=/etc/hostname owner=root group=root mode=0644
   tags:
     - configuration
+    - 
 
 - name: Update IPv4 hostname /etc/hosts
   lineinfile:
@@ -27,15 +28,22 @@
     - configuration
 
 - name: Restart remote hosts
-  command: shutdown -r now "Ansible updates triggered"
-  async: 0
+  command: shutdown -r
+  async: 1
   poll: 0
-  ingore_errors: true
+  sudo: yes
   tags:
     - configuration
+    - norestart
     
 - name: Waiting for servers to come back
-  local_action: wait_for host={{ inventory_hostname }} state=started
+  local_action:
+    module: wait_for
+    host: "{{ inventory_hostname }}"
+    port: 22
+    state: started
+    delay: 120
   sudo: false
   tags:
     - configuration
+    - norestart

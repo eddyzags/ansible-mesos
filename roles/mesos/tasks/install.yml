@@ -4,7 +4,7 @@
 ---
 
 - name: Add apt_key for repos.mesosphere.io repo
-  apt_key: keyserver=keyserver.ubuntu.com:80 id=E56151BF
+  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=E56151BF
   tags:
     - configuration
 
@@ -40,6 +40,11 @@
 
 - name: Copy mesos configuration
   template: src=default_mesos_conf.j2 dest=/etc/default/mesos
+  tags:
+    - configuration
+
+- name: Copy mesos quorum configuraiton file
+  template: src=quorum.j2 dest=/etc/mesos-master/quorum
   tags:
     - configuration
 

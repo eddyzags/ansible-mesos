@@ -21,6 +21,14 @@
   tags:
     - packages
 
+- name: Install docker.py from pip
+  pip: name=docker-py
+  register: job_result
+  until: job_result|success
+  retries: 3
+  tags:
+    - packages
+
 - name: Start Docker-engine service
   service: name=docker state=started
   tags:

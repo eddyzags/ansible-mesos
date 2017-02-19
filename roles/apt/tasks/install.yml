@@ -3,6 +3,14 @@
 # Packages installation
 ---
 
+
+- name: Install https transport
+  apt: pkg="apt-transport-https" state=present force=yes
+  register: job_result|success
+  retries: 3
+  tags:
+    - packages
+    
 - name: Add jessie-backports repo
   apt_repository: repo="deb http://http.debian.net/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}}-backports main" state=present
   tags:

@@ -1,5 +1,5 @@
 # install.yml
-
+#
 # Cluster deployment playbook
 ---
 
@@ -8,15 +8,15 @@
   any_errors_fatal: true
   sudo: yes
   vars:
-    zoo_id: 0
-    zookeeper_standalone: true
-    var_hostname: node
     cluster_name: galaxy
     playbook_mode: "install"
+    mesos_mode: "master-slave"
   roles:
+    - apt
     - sudoers
     - users
-    - golang
+    - docker
+    - docker-registry
     - zookeeper
     - mesos
     - marathon
