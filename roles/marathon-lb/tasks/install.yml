@@ -1,6 +1,0 @@
-# tasks/install.yml
-#
-# Marathon load balancer configuration and insallation
----
-
-- name: 

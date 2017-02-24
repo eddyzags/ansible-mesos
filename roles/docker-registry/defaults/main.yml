@@ -1,7 +1,0 @@
-# defaults/main.yml
-#
-# Zookeeper default variables
----
-
-docker_registry_ports: "5000:5000"
-docker_registry_version: 2

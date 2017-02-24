@@ -16,7 +16,6 @@
     - sudoers
     - users
     - docker
-    - docker-registry
     - zookeeper
     - mesos
     - marathon
